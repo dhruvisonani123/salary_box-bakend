@@ -14,8 +14,8 @@ var { createToken } = require("../authentication");
 router.get("/", function (req, res, next) {
   res.json({ title: "Express" });
 });
-
-router.post("/company", async (req, res) => {
+/////////////////////////////////////////okkkkkkkkkkkkkkkkkkkkkkkkkk
+router.post("/companys", async (req, res) => {
   try {
     var count = await employee.count();
     function pad(num) {
