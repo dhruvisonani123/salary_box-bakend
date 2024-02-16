@@ -19,7 +19,8 @@ var ChatRouter = require("./routes/chats.js");
 var HolidaysRouter = require("./routes/holiday.js");
 var attendance =require("./routes/attendance.js");
 const corsOptions = {
-  origin: "https://https://vercel.com/dheuvisonani123/salary-box-bakend-fre5/EwzbAnpq1BhCxHVWxg1jTjQ52gQe/", // Replace with the actual origin of your frontend
+  
+  origin:"https://salary-box-bakend-fre5-hu5stkf3j-dheuvisonani123.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Add the HTTP methods your API supports
   credentials: true
 };
