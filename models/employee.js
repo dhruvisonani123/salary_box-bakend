@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 
 const employeeSchema = new Schema({
   // User
-  fname: { type: String },
-  lname: { type: String },
+  name: { type: String },
   email: { type: String },
   password:{type:String},
   mobileNo:{type:Number},
