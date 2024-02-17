@@ -25,7 +25,6 @@ router.post("/company", async (req, res) => {
     }
 
     const employeeName = req.body.fname;
-    console.log(employeeName, "employeeName")
     const paddedCount = pad(count + 1);
     // Assuming name is in req.body
 
@@ -193,7 +192,27 @@ console.log("results",results)
 });
 
 
+router.get("/totalemp", async (req, res) => {
+  try {
+    const results = await employee.find();
+    const totalcount =results.length;
+console.log("results",results)
 
+    res.status(200).json({
+      statusCode: 200,
+      message: "Search results",
+      data: results,
+      totalcount:totalcount
+    });
+  } catch (error) {
+    // Handle any errors that occur during the process
+    res.status(500).json({
+      statusCode: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+});
 
 
 
