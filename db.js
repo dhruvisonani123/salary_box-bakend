@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 
 mongoose
   .connect(
-    "mongodb+srv://shivamshukla:shivamshukla123@shivamshukla.iozmxlc.mongodb.net/pro"
+    "mongodb+srv://dhruvi:dhruvi123@cluster0.lskz6ku.mongodb.net/pro"
     
     
 
