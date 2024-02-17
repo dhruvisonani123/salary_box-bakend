@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Empbankdetail = require("../models/empbankdetail");
+const employee = require("../models/employee");
 
 router.post("/bank", async (req, res) => {
   try {
@@ -46,6 +47,28 @@ router.post("/bank", async (req, res) => {
   }
 });
 
+
+router.get("/totalemp", async (req, res) => {
+  try {
+    const results = await employee.find()
+//     const totalcount =results.length;
+// console.log("results",results)
+
+    res.status(200).json({
+      statusCode: 200,
+      message: "Search results",
+      // data: results,
+      totalcount:results.length
+    });
+  } catch (error) {
+    // Handle any errors that occur during the process
+    res.status(500).json({
+      statusCode: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+});
 
 router.get("/bank", async (req, res) => {
   try {
