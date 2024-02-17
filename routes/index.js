@@ -25,6 +25,7 @@ router.post("/company", async (req, res) => {
     }
 
     const employeeName = req.body.sname;
+    console.log(employeeName, "employeeName")
     const paddedCount = pad(count + 1);
     // Assuming name is in req.body
 
