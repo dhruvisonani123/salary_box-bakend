@@ -182,7 +182,7 @@ router.put("/imageupdate/:id",async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // Find a user with the provided name
-    const user = await Register.findOne({ name: req.body.name, password: req.body.password });
+    const user = await Register.findOne({ fname: req.body.fname, password: req.body.password });
 console.log(user,"user")
     if (!user) {
       return res
@@ -195,7 +195,7 @@ console.log(user,"user")
     // Create a token using the user's information (excluding the password)
     const token = await createToken({
       _id: user._id,
-      name: user.name,
+      fname: user.fname,
       email: user.email,
       password:user.password,
       mobileNo: user.mobileNo,
