@@ -18,6 +18,7 @@ var PunchinRouter = require("./routes/punching.js");
 var ChatRouter = require("./routes/chats.js");
 var HolidaysRouter = require("./routes/holiday.js");
 var attendance =require("./routes/attendance.js");
+var sign=require("./routes/sign.js")
 const corsOptions = {
   
   origin:"https://salary-box-bakend-fre5-hu5stkf3j-dheuvisonani123.vercel.app",
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors(corsOptions));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
@@ -49,8 +51,8 @@ app.use("/document",document);
 app.use("/holiday", HolidaysRouter);
 app.use("/latecount",latecount);
 app.use("/salary",salary);
+app.use("/sign",sign)
 app.use("/attendance",attendance);
-app.use(cors(corsOptions));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -192,7 +192,7 @@ router.get('/matching-mobiles/:date', async (req, res) => {
   try {
     const selectedDate = new Date(req.params.date);
     // Find mobile numbers and names in the 'employee' collection
-    const employees = await Employee.find({}, 'mobileNo name');
+    const employees = await Employee.find({}, 'mobileNo fname');
     // Find mobile numbers in the 'punching' collection for the selected date
     const punchMobiles = await Punching.distinct('mobileNo', {
       attendandanceDate: selectedDate,
@@ -202,11 +202,11 @@ router.get('/matching-mobiles/:date', async (req, res) => {
     const matchingEmployees = employees.filter((employee) => punchMobiles.includes(employee.mobileNo));
     const mismatchedEmployees = employees.filter((employee) => !punchMobiles.includes(employee.mobileNo));
     const presentData = matchingEmployees.map((employee) => ({
-      name: employee.name,
+      fname: employee.fname,
       mobileNo: employee.mobileNo,
     }));
     const absentData = mismatchedEmployees.map((employee) => ({
-      name: employee.name,
+      fname: employee.fname,
       mobileNo: employee.mobileNo,
     }));
     // Extract punch in and punch out times for present employees
@@ -218,7 +218,7 @@ router.get('/matching-mobiles/:date', async (req, res) => {
       const employeePunchData = punchData.find((punch) => punch.mobileNo === employee.mobileNo);
       if (employeePunchData) {
         return {
-          name: employee.name,
+          fname: employee.fname,
           mobileNo: employee.mobileNo,
           punchIn: employeePunchData.attendandanceTime,
           punchOut: punchData.find((punch) => punch.mobileNo === employee.mobileNo && punch.status === 'Punch Out')

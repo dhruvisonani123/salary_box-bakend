@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var Register = require("../models/employee");
-
+const nodemailer = require("nodemailer");
+const Mailgen =require("mailgen")
 const employee = require("../models/employee");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -51,7 +52,60 @@ router.post("/company", async (req, res) => {
   }
 });
 
-
+router.post("/email",async(req,res)=>{
+  let { name, email, phone,city } = req.body;
+  
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      auth: {
+        user: 'dhruvisonaniid@gmail.com', // Update with your Gmail email
+        pass: 'hqkzfziamuplbfha' // Update with your Gmail password
+      },
+      tls: {
+        rejectUnauthorized: false // Add this line
+      }
+    });
+  
+    const mailGenerator = new Mailgen({
+      theme: 'default',
+      product: {
+        name: 'Sidhhivinayk Company',
+        link: 'https://teamflourish.co/'
+        // You can also add a logo here if needed
+      }
+    });
+  
+    const emailBody = {
+      body: {
+        // name: Name,
+        intro: "You have received a new message from the contact form:",
+        table: {
+          data: [
+            {
+              "Name": name,
+              "Email": email,
+              "Phone": phone,
+             "city":city,
+            }
+          ]
+        },
+        outro: 'Thank you for contacting us.'
+      }
+    };
+  
+    const emailTemplate = mailGenerator.generate(emailBody);
+  
+    const info = await transporter.sendMail({
+      from: 'harpalkotarkotar@gmail.com', // sender address (must be the same as authenticated user)
+      to: "harpalkotarkotar@gmail.com", // recipient email address
+      subject: 'New Message from Contact Form',
+      html: emailTemplate
+    });
+  
+    console.log("Message sent: %s", info.messageId);
+    res.json(info.messageId);
+})
 
 
 router.get("/search/:mobileNumber", async (req, res) => {
@@ -129,7 +183,7 @@ router.post("/login", async (req, res) => {
   try {
     // Find a user with the provided name
     const user = await Register.findOne({ name: req.body.name, password: req.body.password });
-
+console.log(user,"user")
     if (!user) {
       return res
         .status(403)
@@ -213,6 +267,7 @@ console.log("results",results)
     });
   }
 });
+
 
 
 
