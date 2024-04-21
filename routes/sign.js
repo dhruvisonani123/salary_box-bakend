@@ -26,7 +26,7 @@ router.post("/sign", async (req, res) => {
         res.json({
             statusCode:200,
             data:data,
-            message:"register successfully"
+            message:"register successfully added"
         })
     }
 }
