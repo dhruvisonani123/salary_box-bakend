@@ -21,7 +21,7 @@ var attendance =require("./routes/attendance.js");
 var sign=require("./routes/sign.js")
 const corsOptions = {
   
-  origin:"https://salary-box-bakend-fre5-hu5stkf3j-dheuvisonani123.vercel.app",
+  origin:"https://salary-box-bakend-fre5.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Add the HTTP methods your API supports
   credentials: true
 };
@@ -32,13 +32,13 @@ var app = express();
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "jade");
 
-app.use(cors());
+app.use(cors({origin:true}));
+// app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors(corsOptions));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
